@@ -1,0 +1,12 @@
+DATA: lo_alv TYPE REF TO cl_salv_table.
+
+* Criar ALV
+cl_salv_table=>factory(
+  IMPORTING r_salv_table = lo_alv
+  CHANGING  t_table      = lt_dados ). " Sua tabela interna de dados
+
+* Habilitar exportação para Excel
+lo_alv->get_functions( )->set_all( abap_true ).
+
+* Exibir ALV
+lo_alv->display( ).
