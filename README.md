@@ -69,5 +69,6 @@ CALL FUNCTION 'REUSE_ALV_GRID_DISPLAY'
 Este projeto é open source sob a licença MIT.
 
 🚀 Gostou do projeto?
-Deixe um ⭐ no repositório e ajude a comunidade!
+Deixe um ⭐ no repositório!
+Gratidão!!!
 
