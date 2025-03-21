@@ -1,0 +1,24 @@
+📌 Explicação do Código
+
+🟢 [1] Tela de Seleção
+Define os critérios que o usuário deve preencher para gerar o relatório:
+✔ p_kunnr - Código do cliente (obrigatório).
+✔ s_date - Intervalo de datas para filtrar os documentos.
+
+🟢 [2] Declaração de Dados
+Define a estrutura ty_sales, que contém:
+✔ vbeln - Número do documento de venda.
+✔ kunnr - Código do cliente.
+✔ erdat - Data de criação do documento.
+
+Além disso, cria a tabela interna lt_sales para armazenar os registros selecionados.
+
+🟢 [3] Seleção de Dados
+✔ Busca os documentos de vendas na tabela VBAK.
+✔ Filtra os registros pelo p_kunnr (cliente) e pelo intervalo s_date.
+✔ Salva os resultados na tabela lt_sales.
+
+🟢 [4] Exibição no ALV
+✔ Usa a classe cl_salv_table para formatar os dados em um relatório ALV.
+✔ O TRY...CATCH garante que erros na exibição sejam tratados corretamente.
+
