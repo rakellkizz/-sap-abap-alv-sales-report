@@ -1,12 +1,15 @@
 SAP ABAP ALV Sales Report
 
 Um relatório ALV para análise de vendas no SAP, permitindo filtros dinâmicos, exportação de dados e layout customizável.
-
+## 
 📌 Detalhes do Projeto
-🔹 Tecnologia	🔹 Tipo	🔹 Objetivo
+- 🔹 **Tecnologia**	
+- 🔹 **Tipo**	
+- 🔹**Objetivo**
+
 ABAP	Relatório ALV (Grid Display)	Fornecer uma visão detalhada das vendas para tomada de decisão
 ## 
-🚀 *Recursos do Relatório
+🚀 Recursos do Relatório
 
 - ✔️ **Geração de relatório ALV estruturado**  
 - ✔️ **Filtros dinâmicos para segmentação de vendas**  
