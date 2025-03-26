@@ -1,0 +1,57 @@
+🔹 Estrutura da Tabela KNA1
+A tabela KNA1 já vem com colunas (campos) fixas no SAP. Quando você adiciona um novo cliente, na verdade está inserindo uma nova linha na tabela.
+
+Colunas (Campos) → Cada campo representa uma informação do cliente.
+
+Linhas (Registros) → Cada cliente cadastrado é uma nova linha na tabela.
+
+📌 Exemplo de Estrutura da Tabela KNA1
+KUNNR (Código) 	NAME1 (Nome)	   LAND1(País)  ORT01 (Cidade) 	 KTOKD (Grupo)
+100001	        João Silva Ltda  	BR	        São Paulo    	    0001
+100002	        Maria Oliveira  	BR	        Rio de Janeiro	  0003
+100003	        ACME Inc.       	US	        New York	        0002
+Cada linha representa um cliente diferente.
+Cada coluna representa uma informação específica do cliente.
+
+🔹 Como Adicionar Novos Clientes na KNA1?
+Os clientes são cadastrados através de transações específicas do SAP ou por código ABAP.
+
+1️⃣ Cadastrar Cliente Manualmente no SAP
+Usando a transação XD01 ou VD01, você pode cadastrar um novo cliente preenchendo os dados necessários.
+
+2️⃣ Inserir Cliente via ABAP (Código)
+Se precisar inserir clientes diretamente na tabela, pode usar um código ABAP como este:
+
+DATA: ls_cliente TYPE kna1.
+
+ls_cliente-kunnr = '100004'.  " Código do Cliente
+ls_cliente-name1 = 'Tech Solutions'. " Nome do Cliente
+ls_cliente-land1 = 'BR'. " País
+ls_cliente-ort01 = 'Curitiba'. " Cidade
+ls_cliente-ktokd = '0001'. " Grupo de Cliente
+
+INSERT INTO kna1 VALUES ls_cliente.
+IF sy-subrc = 0.
+  WRITE: 'Cliente cadastrado com sucesso!'.
+ELSE.
+  WRITE: 'Erro ao cadastrar cliente.'.
+ENDIF.
+📌 IMPORTANTE: Esse código só funciona se as permissões de escrita na tabela estiverem liberadas.
+🚀 Resumo
+✔️ A tabela KNA1 já possui colunas fixas.
+✔️ Você adiciona clientes (linhas), mas não altera a estrutura (colunas).
+✔️ Os clientes são cadastrados por transações no SAP (XD01/VD01) ou via código ABAP.
+✔️ Cada cliente tem um código único (KUNNR) e pertence a um grupo (KTOKD).
+
+🔹 Quer testar alguma consulta na KNA1 no SAP? 🚀
+
+
+
+
+
+
+
+
+
+
+
