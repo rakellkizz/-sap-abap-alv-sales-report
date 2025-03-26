@@ -1,0 +1,74 @@
+📌 Tipos de Clientes mais comuns na KNA1
+1️⃣ Clientes Corporativos (Empresas) 🏢
+
+Empresas que compram produtos ou serviços.
+
+Exemplo: Distribuidores, Revendedores, Fornecedores.
+
+Grupo de Cliente (KTOKD): '0001', '0002'... (depende da configuração da empresa).
+
+2️⃣ Clientes Individuais (Pessoa Física) 👤
+
+Pessoas comprando diretamente da empresa.
+
+Exemplo: Consumidores finais em e-commerce.
+
+Grupo de Cliente (KTOKD): '0003', '0004'...
+
+3️⃣ Clientes Nacionais 🌍
+
+Clientes que compram dentro do mesmo país da empresa.
+
+Campo LAND1 = 'BR' (Brasil), 'US' (Estados Unidos), etc.
+
+4️⃣ Clientes Internacionais ✈️
+
+Clientes que compram de outros países.
+
+Exemplo: Exportação de produtos para outras regiões.
+
+Grupo de Cliente (KTOKD) específico para clientes internacionais.
+
+5️⃣ Clientes Varejistas (B2C) 🛒
+
+Empresas que vendem direto ao consumidor final.
+
+Normalmente usados em integrações de e-commerce e CRM.
+
+6️⃣ Clientes Atacadistas (B2B) 🚛
+
+Empresas que compram em grandes quantidades para revenda.
+
+Usado para distribuidores e parceiros comerciais.
+
+7️⃣ Clientes Internos (Unidades da Própria Empresa) 🏭
+
+Quando a empresa tem várias filiais e precisa tratá-las como "clientes".
+
+Usado para movimentação de produtos entre plantas ou centros de distribuição.
+
+8️⃣ Clientes de Serviços 💼
+
+Empresas que contratam serviços em vez de comprar produtos físicos.
+
+Exemplo: Suporte técnico, consultoria, manutenção.
+
+🔹 Onde visualizar o Tipo de Cliente?
+Se quiser ver os tipos de clientes no SAP, pode usar a transação SE16N na tabela KNA1 e verificar os valores do campo KTOKD.
+
+🔹 Como Filtrar Clientes por Tipo?
+Você pode rodar um código ABAP para listar clientes de um determinado tipo:
+
+abap
+Copiar
+Editar
+SELECT kunnr, name1, land1, ktokd
+  FROM kna1
+  WHERE ktokd = '0001'  " Exemplo: Clientes Corporativos
+  INTO TABLE @DATA(lt_clientes).
+OBS Isso retorna apenas os clientes que pertencem ao grupo 0001 (definido pela empresa).
+🚀 Resumo:
+✔️ KNA1 armazena diferentes tipos de clientes (empresas, pessoas físicas, distribuidores, etc.).
+✔️ O tipo de cliente é definido pelo campo KTOKD (Grupo de Clientes).
+✔️ Cada empresa pode configurar seus próprios grupos de clientes no SAP.
+✔️ Clientes podem ser nacionais, internacionais, B2B, B2C e até internos.
