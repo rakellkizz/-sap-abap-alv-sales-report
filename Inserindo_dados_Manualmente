@@ -1,0 +1,62 @@
+1️⃣ Inserindo Dados Manualmente via Transação XD01/VD01
+Se você quiser cadastrar um novo cliente manualmente, pode usar as transações padrão:
+
+🔹 XD01 – Criar Cliente (visão Geral)
+🔹 VD01 – Criar Cliente (visão de Vendas)
+
+📌 Passos:
+1️⃣ Digite XD01 ou VD01 na barra de comandos e pressione Enter.
+2️⃣ Preencha os campos obrigatórios (como Nome, Código do Cliente, País, Cidade etc.).
+3️⃣ Salve o registro – os dados serão armazenados na KNA1.
+
+2️⃣ Inserindo Dados via Código ABAP (INSERT INTO KNA1)
+Se precisar automatizar a inserção, pode usar um código ABAP para gravar dados diretamente na tabela KNA1.
+
+🔹 Código exemplo para inserir um cliente novo:
+
+abap
+Copiar
+Editar
+DATA: ls_cliente TYPE kna1.  " Work area para armazenar os dados do cliente
+
+" Preenchendo os dados do novo cliente
+ls_cliente-kunnr = '100001'.   " Código do Cliente
+ls_cliente-name1 = 'Cliente Teste'.  " Nome do Cliente
+ls_cliente-land1 = 'BR'.       " País
+ls_cliente-ort01 = 'São Paulo'. " Cidade
+
+" Inserindo na tabela KNA1
+INSERT INTO kna1 VALUES ls_cliente.
+
+IF sy-subrc = 0.
+  WRITE: 'Cliente inserido com sucesso!'.
+ELSE.
+  WRITE: 'Erro ao inserir o cliente!'.
+ENDIF.
+📌 Importante:
+⚠️ Você só pode fazer isso se tiver permissão para escrita na KNA1.
+⚠️ Algumas empresas não permitem INSERT INTO KNA1 diretamente.
+
+ Inserindo Dados via BAPI (Método Correto e Seguro)
+O jeito correto de inserir clientes no SAP é através de BAPIs, que são funções padrão do SAP para manipular dados.
+
+🔹 BAPI para criar clientes:
+CALL FUNCTION 'BAPI_CUSTOMER_CREATEFROMDATA1'
+  EXPORTING
+    customeraddress = ls_cliente_address
+    customerdatas = ls_cliente_data
+  IMPORTING
+    customerno = lv_new_customer.
+📌 Por que usar BAPI?
+✅ Garante que regras de negócio sejam seguidas.
+✅ Evita erros de inserção direta na tabela.
+✅ Mantém integrações e validações do sistema.
+
+🔹 Posso adicionar outros campos à KNA1?
+A estrutura da tabela KNA1 é fixa e padronizada pelo SAP, então você não pode adicionar novos campos diretamente.
+
+⚠️ Mas há soluções alternativas!
+Se precisar de novos campos, pode usar Enhancements, Exits ou uma tabela Z personalizada para armazenar informações extras.
+
+OBS: Na tabela KNA1, podem ser cadastrados diferentes tipos de clientes, dependendo do cenário de negócio da empresa. O tipo de cliente é definido pelo campo KTOKD (Grupo de Clientes), que indica a categoria do cliente dentro do sistema SAP.
+
