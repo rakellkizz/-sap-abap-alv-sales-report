@@ -1,0 +1,129 @@
+Exemplo de Demanda: Relatório ALV de Clientes
+
+Descrição da Demanda:
+
+Objetivo:
+Desenvolver um relatório ABAP utilizando ALV para listar os clientes cadastrados na tabela KNA1.
+
+Requisitos:
+
+1 - O relatório deve exibir as seguintes colunas:
+
+2 - Código do Cliente (KUNNR)
+
+3 - Nome do Cliente (NAME1)
+
+4 - Cidade (ORT01)
+
+5 - País (LAND1)
+
+✅ Permitir filtro por país, para que o usuário possa selecionar e visualizar apenas clientes de um determinado país.
+
+✅ O relatório deve ser interativo, permitindo ordenação e exportação dos dados.
+
+•Critérios de Aceitação:
+
+✅ Código ABAP comentado e documentado.
+
+✅ Testado no ambiente SAP, com validação dos filtros e funcionalidades do ALV.
+
+✅ Print da execução para comprovação da funcionalidade.
+
+• Como Iniciar o Trabalho:
+
+1 - Entendimento da Demanda:
+
+☑️ Leia atentamente os requisitos e esclareça dúvidas com seu gestor, se necessário.
+
+☑️ Revise a estrutura da tabela KNA1 (usando a transação SE11) para conhecer os campos disponíveis.
+
+2 - Configuração do Ambiente de Desenvolvimento:
+
+☑️ Abra a transação SE38 ou SE80 para criar um novo programa ABAP.
+
+☑️ Escolha um nome de programa que siga o padrão da sua empresa (por exemplo, ZRELATORIO_ALV_CLIENTES).
+
+3 - Planejamento do Código:
+
+☑️ Defina os parâmetros de seleção (por exemplo, um parâmetro para o país).
+
+☑️ Escreva o código para realizar a consulta na tabela KNA1 com base no filtro informado.
+
+☑️ Configure o ALV utilizando as SALV Classes para exibir os dados.
+
+4 - Desenvolvimento do Código ABAP:
+
+☑️ Crie a tabela interna para armazenar os dados dos clientes.
+
+☑️ Implemente a consulta SELECT com filtro opcional.
+
+☑️ Configure e exiba o ALV com funcionalidades interativas (ordenação, exportação, etc.).
+
+5 - Testes e Validação:
+
+☑️ Execute o programa no ambiente de desenvolvimento.
+
+☑️ Teste diferentes cenários, como a ausência de dados para um país específico e a funcionalidade de exportação.
+
+☑️ Capture prints da execução para documentar a funcionalidade.
+
+6 - Documentação:
+
+☑️ Comente o código explicando cada parte e os objetivos das funções implementadas.
+
+☑️ Crie um README.md ou documento de apoio, explicando a demanda, o funcionamento do relatório e os passos para executá-lo.
+
+REPORT zrelatorio_alv_clientes.
+
+" Declaração de variáveis e tabela interna para os clientes
+DATA: lt_clientes TYPE TABLE OF kna1,
+      ls_cliente  TYPE kna1.
+
+" Parâmetro de seleção para filtro de país
+PARAMETERS: p_pais TYPE land1 LOWER CASE.
+
+" Seleciona dados da tabela KNA1 conforme o país informado
+SELECT kunnr, name1, ort01, land1
+  FROM kna1
+  WHERE land1 = @p_pais
+  INTO TABLE @lt_clientes.
+
+" Validação: se não encontrar registros, informa o usuário
+IF lt_clientes IS INITIAL.
+  MESSAGE 'Nenhum cliente encontrado para este país.' TYPE 'I'.
+  EXIT.
+ENDIF.
+
+" Cria o ALV usando SALV Classes
+DATA: o_alv TYPE REF TO cl_salv_table.
+
+TRY.
+    cl_salv_table=>factory(
+      IMPORTING r_salv_table = o_alv
+      CHANGING  t_table      = lt_clientes
+    ).
+
+    " Ativa funcionalidades do ALV (ordenar, filtrar, etc.)
+    DATA(o_functions) = o_alv->get_functions( ).
+    o_functions->set_all( abap_true ).
+
+    " Exibe o ALV na tela
+    o_alv->display( ).
+
+  CATCH cx_salv_msg INTO DATA(lx_msg).
+    MESSAGE lx_msg->get_text( ) TYPE 'E'.
+ENDTRY.
+
+Próximos Passos:
+
+Refinar o Código:
+
+Adicionar comentários e melhorias na formatação do ALV, se necessário, por exemplo, customizando os títulos das colunas.
+
+Feedback:
+Apresente uma versão preliminar ao seu gestor para receber feedback e realizar os ajustes necessários.
+
+Essa abordagem ajuda a estruturar seu desenvolvimento de forma organizada, garantindo que os requisitos sejam atendidos e que o relatório seja de fácil manutenção e entendimento.
+
+Se precisar de mais alguma orientação ou tiver dúvidas específicas, estou à disposição!
+
