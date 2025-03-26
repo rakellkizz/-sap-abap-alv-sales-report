@@ -1,0 +1,102 @@
+Sim! Podemos customizar um ALV de várias formas no ABAP, como:
+
+✅ Mudando cores das linhas e colunas
+✅ Definindo títulos personalizados
+✅ Ajustando larguras das colunas
+✅ Adicionando botões e eventos interativos
+✅ Habilitando ordenação e filtros avançados
+
+🎨 Exemplo de ALV Customizado com Cores e Títulos
+REPORT zcustom_alv.
+
+" Declaração de tabela interna e work area
+DATA: lt_clientes TYPE TABLE OF kna1,
+      wa_cliente  TYPE kna1.
+
+" Parâmetro para filtro de país
+PARAMETERS: p_pais TYPE land1.
+
+" Buscar dados da tabela KNA1 aplicando o filtro
+SELECT kunnr, name1, ort01, land1
+  FROM kna1
+  WHERE land1 = @p_pais
+  INTO TABLE @lt_clientes.
+
+" Verificar se há dados retornados
+IF lt_clientes IS INITIAL.
+  MESSAGE 'Nenhum cliente encontrado para este país.' TYPE 'I'.
+  RETURN.
+ENDIF.
+
+" Criar ALV com SALV Classes
+DATA: o_alv TYPE REF TO cl_salv_table.
+
+TRY.
+    " Criar objeto ALV
+    cl_salv_table=>factory(
+      IMPORTING r_salv_table = o_alv
+      CHANGING  t_table      = lt_clientes
+    ).
+
+    " Configurar colunas
+    DATA(o_columns) = o_alv->get_columns( ).
+    DATA(o_column)  TYPE REF TO cl_salv_column.
+
+    o_column = o_columns->get_column( 'KUNNR' ). "Código do Cliente
+    o_column->set_short_text( 'Código' ).
+
+    o_column = o_columns->get_column( 'NAME1' ). "Nome do Cliente
+    o_column->set_short_text( 'Nome' ).
+
+    o_column = o_columns->get_column( 'ORT01' ). "Cidade
+    o_column->set_short_text( 'Cidade' ).
+
+    o_column = o_columns->get_column( 'LAND1' ). "País
+    o_column->set_short_text( 'País' ).
+
+    " Habilitar filtros e ordenação
+    DATA(o_functions) = o_alv->get_functions( ).
+    o_functions->set_all( abap_true ).
+
+    " Exibir ALV na tela
+    o_alv->display( ).
+
+  CATCH cx_salv_msg INTO DATA(lx_msg).
+    MESSAGE lx_msg->get_text( ) TYPE 'E'.
+ENDTRY.
+
+📌 O que este código faz?
+✔️ Personaliza os títulos das colunas (usando set_short_text)
+✔️ Ativa funcionalidades interativas (filtros, ordenação)
+✔️ Cria um ALV mais organizado e legível
+📌 Outras customizações que podemos fazer:
+🔹 Mudar cores das linhas (ex: clientes VIP em destaque)
+🔹 Adicionar botões personalizados no ALV
+🔹 Criar um layout de exibição salvo para o usuário
+O ALV (ABAP List Viewer) é apenas uma forma de exibir os dados da tabela KNA1 de maneira estruturada, interativa e personalizável.
+
+📌 Diferença entre a estrutura e os dados da tabela KNA1:
+
+1️⃣ Estrutura da tabela KNA1 (Definição no SE11)
+
+Define quais campos existem (ex: KUNNR, NAME1, LAND1, ORT01).
+
+Determina os tipos de dados e tamanho de cada campo.
+
+Estabelece chaves primárias e estrangeiras.
+
+2️⃣ Dados armazenados na KNA1 (Consulta no SE16)
+
+São os registros reais inseridos no banco de dados.
+
+Cada linha representa um cliente com seus dados.
+
+3️⃣ ALV com dados da KNA1 (Exibição personalizada no SE38)
+
+Apenas exibe os dados que já estão armazenados na KNA1.
+
+Pode incluir filtros, ordenação e cores para melhorar a visualização.
+
+🔹 Resumo: O ALV NÃO modifica a estrutura da tabela, ele apenas exibe os dados de uma forma organizada e interativa. 🚀
+
+
