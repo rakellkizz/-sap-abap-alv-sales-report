@@ -1,1 +1,22 @@
-"* Documenta��o do projeto *" 
+"* Documenta‡Æo do projeto *" 
+📌 O que é um Relatório ALV?
+É um tipo de relatório no SAP que permite visualizar, ordenar e filtrar dados de forma amigável na interface do usuário. Ele não altera os dados no banco, apenas os exibe conforme os critérios definidos no código ABAP.
+
+📌 Como funciona um ALV Report?
+1️⃣ O código ABAP faz uma consulta no banco de dados (SELECT em tabelas como KNA1, MARA, etc.).
+2️⃣ Os dados são carregados para uma tabela interna.
+3️⃣ O ALV exibe os dados, permitindo ações como filtros, ordenação e exportação para Excel.
+
+📌 Os Filtros São Aplicados na Consulta
+Os filtros são definidos antes da exibição do ALV, normalmente com parâmetros de seleção. Exemplo:
+
+abap
+Copiar
+Editar
+PARAMETERS: p_pais TYPE land1. "Filtro por país
+
+SELECT kunnr, name1, land1 
+  FROM kna1
+  WHERE land1 = @p_pais
+  INTO TABLE @lt_clientes. 
+Isso filtra os clientes antes de exibir no ALV, mas não altera a tabela no banco de dados.
