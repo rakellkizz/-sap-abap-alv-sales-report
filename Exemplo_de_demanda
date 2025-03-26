@@ -114,16 +114,16 @@ TRY.
     MESSAGE lx_msg->get_text( ) TYPE 'E'.
 ENDTRY.
 
-Próximos Passos:
+✔ Próximos Passos:
 
 Refinar o Código:
 
-Adicionar comentários e melhorias na formatação do ALV, se necessário, por exemplo, customizando os títulos das colunas.
+➢ Adicionar comentários e melhorias na formatação do ALV, se necessário, por exemplo, customizando os títulos das colunas.
 
 Feedback:
-Apresente uma versão preliminar ao seu gestor para receber feedback e realizar os ajustes necessários.
+➢ Apresente uma versão preliminar ao seu gestor para receber feedback e realizar os ajustes necessários.
 
-Essa abordagem ajuda a estruturar seu desenvolvimento de forma organizada, garantindo que os requisitos sejam atendidos e que o relatório seja de fácil manutenção e entendimento.
+➢ Essa abordagem ajuda a estruturar seu desenvolvimento de forma organizada, garantindo que os requisitos sejam atendidos e que o relatório seja de fácil manutenção e entendimento.
 
-Se precisar de mais alguma orientação ou tiver dúvidas específicas, estou à disposição!
+➢ Se precisar de mais alguma orientação ou tiver dúvidas específicas, estou à disposição!
 
